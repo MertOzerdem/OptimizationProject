@@ -1,0 +1,14 @@
+/*********************************************
+ * OPL 12.10.0.0 Data
+ * Author: m_e_r
+ * Creation Date: 1 May 2020 at 23:46:17
+ *********************************************/
+n=6;
+
+SheetConnection travelTimes("example.xlsx");
+
+points from SheetRead(travelTimes,"A1:F6");
+
+SheetConnection StudyTimes("studentTimes.xlsx");
+
+times from SheetRead(StudyTimes,"A1:E1");
