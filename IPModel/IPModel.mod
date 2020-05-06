@@ -26,6 +26,7 @@
  
  ///////////////////////////////////
  range countOfStudents = 1..n-1;
+ //range countOfStudents = 1..5;
  
  float times[countOfStudents] = ...;
  
@@ -66,12 +67,12 @@
  minimize TotalDistance;
  subject to {
   	forall ( j in students){
-  		flow_in:
+  		enter:
   		sum ( i in students : i!=j) X[<i,j>] == 1;  	
   	}
   	
   	forall ( i in students){
-  		flow_out:
+  		exit:
   		sum ( j in students : j!=i) X[<i,j>] == 1;  	
   	}
   	
@@ -79,4 +80,39 @@
   		subtour:
   		u[i]-u[j]+(n-1)*X[<i,j>] <= n-2;  	
   	}
+ }
+ 
+ 
+ {edge} tempEdges= {<1,1>};
+ execute{
+   //writeln(typeof(tempEdges));
+   for (var x in edges){
+     tempEdges.add(x.i, x.j)
+   }
+   
+   //writeln(X[tempEdges.get(1,4)]);
+   
+   function recursivePathFinder(X,N,index){
+     var result = "";
+     for(var i=1; i < N+1; i++){
+       
+       if (X[tempEdges.get(index,1)] == 1){
+         //write("-", index);
+         result = result + "-" + index;
+         write(result);
+         writeln("-1");
+         return;
+       }
+       else if(X[tempEdges.get(index,i)] == 1){
+         result = result + "-" + index;
+         write(result);
+         recursivePathFinder(X,N,i);
+       }
+     }
+     
+     return;
+   }
+   
+   recursivePathFinder(X,n,1);
+   writeln("Optimal Solution: ", TotalDistance);
  }

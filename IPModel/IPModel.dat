@@ -3,11 +3,13 @@
  * Author: m_e_r
  * Creation Date: 1 May 2020 at 23:46:17
  *********************************************/
+
+// Change n, and excel locations of both sheets
 n=6;
 
 SheetConnection travelTimes("example.xlsx");
 
-points from SheetRead(travelTimes,"A1:F6");
+points from SheetRead(travelTimes,"B2:G7");
 
 SheetConnection StudyTimes("studentTimes.xlsx");
 
